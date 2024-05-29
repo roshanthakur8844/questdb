@@ -8,7 +8,8 @@ public class AuthExample {
         // 1. "localhost:9000" with a host and port of your QuestDB server
         // 2. "testUser1" with KID portion from your JSON Web Key
         // 3. token with the D portion of your JSON Web Key
-        try (Sender sender = Sender.fromConfig("tcp::addr=localhost:9009;user=testUser1;token=GwBXoGG5c6NoUTLXnzMxw_uNiVa8PKobzx5EiuylMW0;")) {
+        //The bug in the code is the extra colon in the configuration string passed to Sender.fromConfig. To fix it, remove the extra colon after "tcp":
+        try (Sender sender = Sender.fromConfig("tcp:addr=localhost:9009;user=testUser1;token=GwBXoGG5c6NoUTLXnzMxw_uNiVa8PKobzx5EiuylMW0;")) { 
             sender.table("weather_sensor")
                     .symbol("id", "toronto1")
                     .doubleColumn("temperature", 23.5)
